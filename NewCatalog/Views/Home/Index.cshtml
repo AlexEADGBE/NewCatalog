@@ -1,0 +1,27 @@
+﻿@model IEnumerable<NewCatalog.Models.Product>
+
+@{
+    ViewData["Title"] = "Welcome to Music Shop!";
+}
+
+<h1 class="text-center mb-4">Наші товари</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var product in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="@product.ImagePath" class="card-img-top" alt="@product.Name" style="height: 200px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                </div>
+                <div class="card-footer text-center">
+                    <span class="text-success fw-bold">@product.Price.ToString("C")</span>
+                    <br />
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary mt-2">Детальніше</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

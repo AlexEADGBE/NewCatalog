@@ -1,0 +1,57 @@
+﻿@model NewCatalog.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<h2>Редагувати товар</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name">Назва</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Ціна</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Опис</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId">Категорія</label>
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control">
+            <option value="">-- Виберіть категорію --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Оновити зображення</label>
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.ImagePath))
+    {
+        <div class="mt-2">
+            <p>Поточне зображення:</p>
+            <img src="@Model.ImagePath" alt="Фото товару" width="150" />
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary mt-3">Зберегти зміни</button>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary mt-2">Назад до списку</a>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+

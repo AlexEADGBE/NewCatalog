@@ -1,0 +1,30 @@
+﻿@model NewCatalog.Models.Category
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<h2>Редагувати категорію</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name">Назва категорії</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ParentCategoryId">Батьківська категорія</label>
+        <select asp-for="ParentCategoryId" asp-items="ViewBag.ParentCategories" class="form-control">
+            <option value="">-- Без батьківської категорії --</option>
+        </select>
+        <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

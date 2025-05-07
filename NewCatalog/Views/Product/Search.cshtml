@@ -1,0 +1,28 @@
+﻿@model List<Product>
+
+<h2>Результати пошуку</h2>
+
+@if (!Model.Any())
+{
+    <p>Нічого не знайдено.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img src="@item.ImagePath" class="card-img-top" alt="@item.Name" style="max-height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text"><strong>Ціна:</strong> @item.Price грн</p>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Детальніше</a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+}

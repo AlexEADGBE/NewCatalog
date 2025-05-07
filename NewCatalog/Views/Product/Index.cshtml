@@ -1,0 +1,72 @@
+﻿@model IEnumerable<NewCatalog.Models.Product>
+
+@{
+    ViewData["Title"] = "Усі товари";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Усі товари</h2>
+    <a class="btn btn-success" asp-action="Create">
+        <i class="bi bi-plus-lg"></i> Додати новий товар
+    </a>
+</div>
+
+@Html.AntiForgeryToken()
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Наразі немає жодного товару.
+    </div>
+}
+else
+{
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Назва</th>
+                <th>Ціна (₴)</th>
+                <th>Категорія</th>
+                <th>Зображення</th>
+                <th class="text-center">Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price.ToString("F2")</td>
+                    <td>@item.Category?.Name <!-- ?? "Без категорії" --></td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="@item.ImagePath" alt="Фото" style="width: 80px; height: auto; object-fit: cover;" class="img-thumbnail" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">Немає фото</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-primary mb-1" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="bi bi-pencil-square"></i> Редагувати
+                        </a>
+                        <a class="btn btn-sm btn-danger mb-1" asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="bi bi-trash"></i> Видалити
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+

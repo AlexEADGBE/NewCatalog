@@ -1,0 +1,16 @@
+﻿@model NewCatalog.Models.Product
+
+<h2>Видалити товар</h2>
+
+<div>
+    <h4>Точно хочеш видалити цей товар?</h4>
+    <strong>@Model.Name</strong> — @Model.Price грн
+</div>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>
+
