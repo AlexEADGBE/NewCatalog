@@ -23,9 +23,6 @@ namespace NewCatalog.Models
         public Category? ParentCategory { get; set; }
 
 
-
-
-
         public ICollection<Category>? Subcategories { get; set; }
 
         // Навігаційна властивість для товарів у категорії

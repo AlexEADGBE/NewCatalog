@@ -87,7 +87,8 @@ namespace NewCatalog.Controllers
                 return NotFound();
             }
 
-            ViewBag.ParentCategories = new SelectList(_context.Categories.Where(c => c.Id != id), "Id", "Name", category.ParentCategoryId);
+            ViewBag.ParentCategories = new SelectList(_context.Categories.Where(c => c.Id != id), "Id",
+                "Name", category.ParentCategoryId);
             return View(category);
         }
 
@@ -122,7 +123,8 @@ namespace NewCatalog.Controllers
                 return RedirectToAction(nameof(Index), new { parentId = category.ParentCategoryId });
             }
 
-            ViewBag.ParentCategories = new SelectList(_context.Categories.Where(c => c.Id != id), "Id", "Name", category.ParentCategoryId);
+            ViewBag.ParentCategories = new SelectList(_context.Categories.Where(c => c.Id != id), "Id", "Name",
+                category.ParentCategoryId);
             return View(category);
         }
 
